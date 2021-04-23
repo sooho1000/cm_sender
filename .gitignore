@@ -2,3 +2,4 @@ build/
 dist/
 .vscode/
 __pycache__/
+cm_sender.spec

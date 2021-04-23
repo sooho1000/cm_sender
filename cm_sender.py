@@ -10,8 +10,9 @@ import log
 import tail
 from datetime import datetime
 
+f = ftp.FTP()
+
 def send_cm(fpath, fname):
-    f = ftp.FTP()
     f.send_file(fpath, fname)
     
 def find_string(txt):
@@ -29,7 +30,8 @@ def find_string(txt):
 
 if __name__ == "__main__":
     logger = log.get_logger()
-    t = tail.Tail('log/syslog.txt')
+
+    t = tail.Tail('')
     t.register_callback(find_string)
     while True:
         log_file_path = r"C:\KONAN\TransferManager_FTP\log"

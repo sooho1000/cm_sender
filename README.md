@@ -1,4 +1,4 @@
 # cm_sender
 
-# buil
-pyinstaller --onefile cm_sender.py
+# build
+pyinstaller --add-data config.json;. cm_sender.py
