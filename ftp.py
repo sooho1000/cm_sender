@@ -28,6 +28,16 @@ class FTP(object):
                 self.ftp.mkd(path)
                 self.ftp.cwd(path)
 
+    def send_done_file(self, filename):
+        done_file = open(filename + ".done", 'w')
+        done_file.close()
+        done_file = open(filename + ".done",'rb')
+        self.logger.info("Send Done file start" + filename)
+        self.ftp.storbinary('STOR ' +filename + ".done", done_file)
+        self.logger.info("Send Done file end")
+        done_file.close()
+        os.remove(filename + ".done")
+
     def send_file(self, source_path, filename):
         filepath = "CM_EMR"
         now = datetime.datetime.now() # 2018-07-28 12:11:32.669083
@@ -40,4 +50,5 @@ class FTP(object):
         self.ftp.storbinary('STOR ' +filename, myfile)
         self.logger.info("[SEND FILE end]")
         myfile.close()
+        self.send_done_file(filename)
         self.ftp.close
